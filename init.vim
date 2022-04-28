@@ -2,15 +2,17 @@ set number
 syntax on
 set relativenumber
 set termguicolors
+set expandtab
+set tabstop=2
 let mapleader=" "
 call plug#begin()
 "Themes
-Plug 'sainnhe/everforest'
+Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'nanotech/jellybeans.vim'
 "Syntax highligthing
 Plug 'maxmellon/vim-jsx-pretty' 
-Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
 "Utils
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -31,7 +33,8 @@ let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -
 nnoremap <c-p> :Files<cr>
 
 set background=dark
-colorscheme jellybeans
+let gruvbox_contrast_dark='soft'
+colorscheme gruvbox
 
 "Coc vim
 

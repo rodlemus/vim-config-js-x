@@ -8,17 +8,21 @@ let mapleader=" "
 call plug#begin()
 "Themes
 Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'arcticicestudio/nord-vim'
 Plug 'nanotech/jellybeans.vim'
 "Syntax highligthing
 Plug 'maxmellon/vim-jsx-pretty' 
 Plug 'pangloss/vim-javascript'
-"Utils
+"tmux
+Plug 'christoomey/vim-tmux-navigator'
+"nerdtree
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"IDE
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"IDE
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'easymotion/vim-easymotion'
+Plug 'yggdroot/indentline'
 call plug#end()
 
 "maps
@@ -27,13 +31,19 @@ map <leader>w :w<cr>
 nnoremap <leader>n :NERDTreeToggle<CR>
 
 "NerdTRee
-let g:NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeAutoDeleteBuffer=1
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let NERDTreeShowLineNumbers=1
+let NERDTreeMapOpenInTab='\t'
 "fzf
 let $FZF_DEFAULT_COMMAND='find . \( -name node_modules -o -name .git \) -prune -o -print'
 nnoremap <c-p> :Files<cr>
 
 set background=dark
-let gruvbox_contrast_dark='soft'
+let gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
 "Coc vim
@@ -99,10 +109,17 @@ endfunction
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(easymotion-s2)
 
 " Apply AutoFix to problem on the current line.
-nmap <leader>fq  <Plug>(coc-fix-current)
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+
+" tmu navigator
+nnoremap <silent> <Leader><C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <Leader><C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <Leader><C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <Leader><C-l> :TmuxNavigateRight<cr>
+
+"Format current file (prettier need to be installed in your current project) 
+nnoremap <leader>xp :!npx prettier --write %<cr>
